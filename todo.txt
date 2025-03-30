@@ -1,0 +1,10 @@
+x get file structure looking good
+x make sure file paths dont have any issues
+crawl function follows a path, instead of a tree
+set up docker production environment
+store webscrape documents in an appropriate file structure
+clean up code for making the data base
+rebuild the data base
+get the project set up with docker and host (lambda)
+make text generate slowly on the ui side
+summarize the history
