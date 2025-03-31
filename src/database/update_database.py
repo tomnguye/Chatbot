@@ -4,22 +4,20 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from src.database.embedding import get_embedding_function
 from langchain_chroma import Chroma
-from os import listdir
+import os 
+import sys
 
 CHROMA_PATH = "./data_base"
 
-def load_documents(source: str, type: str = "pdf"):
-    if type == "pdf":
-        document_loader = PyPDFDirectoryLoader(source)
-        return document_loader.load()
-    if type == "txt":
-        text = []
-        for file in listdir(source):
-            text_loader = TextLoader(source + "/" + file, "utf-8")
+def load_documents(source: str):
+    text = []
+    for (root, _, files) in os.walk(source):
+        for file in files:
+            text_loader = TextLoader(os.path.join(root, file), "utf-8")
             docs = text_loader.load()
             for doc in docs:
                 text.append(doc)
-        return text
+    return text
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
@@ -65,9 +63,14 @@ def add_to_chroma(chunks: list[Document]):
         new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
         db.add_documents(new_chunks, ids=new_chunk_ids)
 
-def upload(path):
-    documents = load_documents(path, "txt")
+def main(path):
+    documents = load_documents(path)
     chunks = split_documents(documents)
     encode_chunks(chunks)
     add_to_chroma(chunks)
 
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        main(sys.argv[1])
+    else: 
+        print("Not enough arguments provided")

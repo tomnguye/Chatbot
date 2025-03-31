@@ -1,5 +1,5 @@
 from langchain_ollama import ChatOllama
-from src.query_database import query_rag 
+from src.app.query_database import query_rag 
 from res.prompts import SYSTEM_PROMPT
 import gradio as gr
 

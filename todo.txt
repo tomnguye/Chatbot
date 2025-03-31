@@ -1,6 +1,6 @@
 x get file structure looking good
 x make sure file paths dont have any issues
-crawl function follows a path, instead of a tree
+x crawl function follows a path, instead of a tree
 set up docker production environment
 store webscrape documents in an appropriate file structure
 clean up code for making the data base
