@@ -8,3 +8,13 @@ rebuild the data base
 get the project set up with docker and host (lambda)
 make text generate slowly on the ui side
 summarize the history
+
+do request caching if possible
+look at a different model with higher rate limits
+
+make lambda function (rewrite without history)
+
+
+
+docker build --platform linux/amd64 -t aws_rag_app .
+docker run --rm -p 8000:8000 --entrypoint python --env-file .env aws_rag_app app_api_handler.py 

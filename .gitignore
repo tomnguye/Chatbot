@@ -2,3 +2,5 @@ data_base/
 */documents
 __pycache__/
 .venv
+.env
+local
